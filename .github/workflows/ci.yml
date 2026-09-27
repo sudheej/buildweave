@@ -1,0 +1,19 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with: { go-version: '1.24.x' }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '21' }
+      - uses: actions/setup-node@v4
+        with: { node-version: '22', cache: npm, cache-dependency-path: demo/typescript/package-lock.json }
+      - run: go test ./...
+      - run: go vet ./...
+      - run: ./demo/java/gradlew test
+      - run: npm install && npm test
+        working-directory: demo/typescript
+      - run: make demo

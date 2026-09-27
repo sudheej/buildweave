@@ -1,0 +1,7 @@
+{
+  "name": "buildweave-typescript-demo",
+  "private": true,
+  "packageManager": "pnpm@10.17.1",
+  "scripts": { "build": "tsc -b", "test": "tsc -b --pretty false" },
+  "devDependencies": { "typescript": "5.9.2" }
+}

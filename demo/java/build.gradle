@@ -1,0 +1,8 @@
+subprojects {
+  apply plugin: 'java'
+  group = 'dev.buildweave.demo'
+  version = '1.0.0'
+  repositories { mavenCentral() }
+  java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
+  tasks.withType(JavaCompile).configureEach { options.compilerArgs += ['-Xlint:all'] }
+}

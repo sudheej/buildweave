@@ -1,0 +1,8 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/models" },
+    { "path": "packages/service" },
+    { "path": "packages/app" }
+  ]
+}

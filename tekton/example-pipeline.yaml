@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata: { name: buildweave-example }
+spec:
+  params:
+    - { name: branch, type: string }
+    - { name: generation, type: string }
+    - { name: commit, type: string }
+    - { name: tree, type: string }
+  tasks:
+    - name: verify
+      taskRef: { name: buildweave-verify }
+      params:
+        - { name: branch, value: "$(params.branch)" }
+        - { name: generation, value: "$(params.generation)" }
+        - { name: commit, value: "$(params.commit)" }
+        - { name: tree, value: "$(params.tree)" }

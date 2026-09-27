@@ -1,0 +1,2 @@
+rootProject.name = 'buildweave-java-demo'
+include 'core', 'service', 'app'

@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata: { name: buildweave-verify }
+spec:
+  params:
+    - { name: server, type: string, default: "http://buildweave:8787" }
+    - { name: branch, type: string }
+    - { name: generation, type: string }
+    - { name: commit, type: string }
+    - { name: tree, type: string }
+  results:
+    - { name: verification, description: Structured BuildWeave result }
+  steps:
+    - name: request-verification
+      image: ghcr.io/buildweave/buildweave:latest
+      script: |
+        #!/bin/sh
+        set -eu
+        buildweave seal --branch "$(params.branch)" --generation "$(params.generation)" --commit "$(params.commit)" --tree "$(params.tree)"
+        buildweave verify --branch "$(params.branch)" --generation "$(params.generation)" --profile pr-required --json | tee "$(results.verification.path)"

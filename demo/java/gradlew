@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -eu
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+BUILD="$ROOT/build/manual"
+mkdir -p "$BUILD/core" "$BUILD/service" "$BUILD/app"
+javac -d "$BUILD/core" $(find "$ROOT/core/src/main/java" -name '*.java' | sort)
+javac -classpath "$BUILD/core" -d "$BUILD/service" $(find "$ROOT/service/src/main/java" -name '*.java' | sort)
+javac -classpath "$BUILD/core:$BUILD/service" -d "$BUILD/app" $(find "$ROOT/app/src/main/java" -name '*.java' | sort)
+java -classpath "$BUILD/core:$BUILD/service:$BUILD/app" dev.buildweave.app.Main
+echo 'BUILD SUCCESSFUL (portable wrapper fallback)'

@@ -1,0 +1,9 @@
+/.buildweave/
+/.cache/
+/bin/
+demo/java/build/
+demo/java/.gradle/
+demo/typescript/node_modules/
+demo/typescript/packages/*/dist/
+*.tsbuildinfo
+.DS_Store
